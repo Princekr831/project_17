@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exception Handling</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4e1e1;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0c8dea;
+      color: white;
+      padding: 17px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .section {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    h3 {
+      color: #0077cc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .output {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #e6f3ff;
+      border-left: 4px solid #0077cc;
+      color: #003d66;
+      white-space: pre-line;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>JavaScript Exception Handling Examples</h1>
+</header>
+
+<div class="container">
+
+  <!-- 1. Undeclared Variable Error -->
+  <div class="section">
+    <h3>1. Handle Undeclared Variable Exception</h3>
+    <button onclick="handleUndeclared()">Run Example</button>
+    <div class="output" id="output1"></div>
+  </div>
+
+  <!-- 2. Divide by Zero Error -->
+  <div class="section">
+    <h3>2. Throw "Divide by Zero" Error</h3>
+    <button onclick="divideByZero()">Run Example</button>
+    <div class="output" id="output2"></div>
+  </div>
+
+  <!-- 3. Out of Bound Array Access -->
+  <div class="section">
+    <h3>3. Throw "Out of Bound" Error</h3>
+    <button onclick="outOfBoundAccess()">Run Example</button>
+    <div class="output" id="output3"></div>
+  </div>
+
+  <!-- 4. Exception Handling with Finally -->
+  <div class="section">
+    <h3>4. Exception Handling with Finally</h3>
+    <button onclick="handleWithFinally()">Run Example</button>
+    <div class="output" id="output4"></div>
+  </div>
+
+</div>
+
+<script>
+  // 1. Handle undeclared variable
+  function handleUndeclared() {
+    let output = document.getElementById("output1");
+    try {
+      console.log(notDeclaredVar); // not declared
+    } catch (error) {
+      output.innerText = "Error caught: " + error.message;
+    }
+  }
+
+  // 2. Throw divide by zero
+  function divideByZero() {
+    let output = document.getElementById("output2");
+    try {
+      let a = 10;
+      let b = 0;
+      if (b === 0) {
+        throw new Error("Divide by Zero Error!");
+      }
+      output.innerText = "Result: " + (a / b);
+    } catch (error) {
+      output.innerText = "Error caught: " + error.message;
+    }
+  }
+
+  // 3. Throw out of bound error
+  function outOfBoundAccess() {
+    let output = document.getElementById("output3");
+    try {
+      let arr = [1, 2, 3];
+      let index = 5;
+      if (index < 0 || index >= arr.length) {
+        throw new Error("Out of Bound Error!");
+      }
+      output.innerText = "Array Element: " + arr[index];
+    } catch (error) {
+      output.innerText = "Error caught: " + error.message;
+    }
+  }
+
+  // 4. Exception with finally
+  function handleWithFinally() {
+    let output = document.getElementById("output4");
+    try {
+      let num = 10, den = 0;
+      if (den === 0) {
+        throw new Error("Cannot divide by zero!");
+      }
+      output.innerText = "Result: " + (num / den);
+    } catch (error) {
+      output.innerText = "Error caught: " + error.message;
+    } finally {
+      output.innerText += "\nThis block always runs (finally).";
+    }
+  }
+</script>
+
+</body>
+</html>
